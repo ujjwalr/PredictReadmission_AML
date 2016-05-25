@@ -1,0 +1,324 @@
+/*
+Replace the AWSAccessKeyID, AWSSecretAccessKey and AWSRegion with correspoding values
+*/
+
+<!DOCTYPE html>
+<html>
+<head>
+	<style>
+		#id02{
+			
+			background-color:whitesmoke;
+			height:300px;
+			width:30%;
+			padding:5px;	
+			float:right;
+			white-space: pre-line;
+			margin-top:2em; 
+			text-align:center; 
+			font-weight:bold;
+		}
+		
+		#id01{
+			float:left;
+			padding:5px;
+			width:60%;
+			margin:1em;
+		}
+		
+		#id03{
+			font-size:100px;
+			padding-top:10px;
+			
+		}
+		
+		table, th, td {
+			border: none;
+		}
+		
+		table, tr {
+			padding-top: 3px;
+		}
+		
+		select {
+			font-size: 14px;
+		}
+		
+		input[type=radio] {
+			margin-left:0px;
+		}
+	</style>
+</head>
+
+<body onload="refresh()">
+	<div>
+		<img src="https://upload.wikimedia.org/wikipedia/commons/1/1d/AmazonWebservices_Logo.svg" style="display: inline-block; padding-left: 1em;"/>
+		<label style="font-weight: bold; font-size: 30px; text-align: center; display: inherit;">Readmission Prediction for Diabetes Patients</label>
+	</div>
+	<div id="id01">
+		<label style="font-size: 20px; font-style: italic;">Select a few patient attributes and click predict to generate a prediction score. Use different combinations of attributes to alter the score.</label>
+		<table style="padding: 20px 10px;">
+			<tr>
+				<td>Gender</td>
+				<td>
+					<input type="radio" name="field2" id="gender_male" value="Male">Male</input>
+					<input type="radio" name="field2" id="gender_female" value="Female">Female</input>
+				</td>
+			</tr>
+			<tr>
+				<td>Age Category</td>
+				<td>
+					<input type="radio" name="field3" id="age_category_adult" value="Adult">Adult</input>
+					<input type="radio" name="field3" id="age_category_old" value="Old">Old</input>
+					<input type="radio" name="field3" id="age_category_young" value="Young">Young</input>
+				</td>
+			</tr>
+			<tr>
+				<td>Race</td>
+				<td>
+					<Select id="Race">
+						<option value="">Select</option>
+						<option value="Caucasian">Caucasian</option>
+  						<option value="AfricanAmerican">AfricanAmerican</option>
+  						<option value="Hispanic">Hispanic</option>
+  						<option value="Asian">Asian</option>
+  						<option value="Other">Other</option>
+  					</Select>
+				</td>
+			</tr>
+			<tr>
+				<td>Admission Source</td>
+				<td>
+					<Select id="Admission_Source">
+						<option value="">Select</option>
+						<option value="Emergency Room">Emergency Room</option>
+  						<option value="Physician Referral">Physician Referral</option>
+  						<option value="Transfer from a hospital">Transfer from a hospital</option>
+  						<option value="Transfer from another health care facility">Transfer from another health care facility</option>
+  						<option value="Clinic Referral">Clinic Referral</option>
+  						<option value="Transfer from a Skilled Nursing Facility (SNF)">Transfer from a Skilled Nursing Facility (SNF)</option>
+  						<option value="HMO Referral">HMO Referral</option>
+  						<option value="Court/Law Enforcement">Court/Law Enforcement</option>
+  						<option value="Transfer from hospital inpt/same fac reslt in a sep claim">Transfer from hospital inpt/same fac reslt in a sep claim</option>
+  						<option value="Transfer from critial access hospital">Transfer from critial access hospital</option>
+  					</Select>
+				</td>
+			</tr>
+			<tr>
+				<td>Admission Type</td>
+				<td>
+					<Select id="Admission_Type">
+						<option value="">Select</option>
+						<option value="Emergency">Emergency</option>
+  						<option value="Elective">Elective</option>
+  						<option value="Urgent">Urgent</option>
+  						<option value="Trauma Center">Trauma Center</option>
+  						<option value="Newborn">Newborn</option>
+  					</Select>
+				</td>
+			</tr>
+			<tr>
+				<td>Insulin</td>
+				<td>
+					<Select id="Insulin">
+						<option value="">Select</option>
+						<option value="No">No</option>
+  						<option value="Steady">Steady</option>
+  						<option value="Up">Up</option>
+  						<option value="Down">Down</option>
+  					</Select>
+				</td>
+			</tr>
+			<tr>
+				<td>Diabetes Med</td>
+				<td>
+					<input type="radio" name="field9" id="diabetes_med_yes" value="Yes">Yes</input>
+					<input type="radio" name="field9" id="diabetes_med_no" value="No">No</input>
+				</td>
+			</tr>
+			<tr>
+				<td>Discharge Disposition</td>
+				<td>
+					<Select id="Discharge_Disposition">
+						<option value="">Select</option>
+						<option value="Discharged to home">Discharged to home</option>
+  						<option value="Discharged/transferred to SNF">Discharged/transferred to SNF</option>
+  						<option value="Discharged/transferred to home with home health service">Discharged/transferred to home with home health service</option>
+  						<option value="Discharged/transferred to another short term hospital">Discharged/transferred to another short term hospital</option>
+  						<option value="Discharged/transferred to another rehab fac including rehab units of a hospital .">Discharged/transferred to another rehab fac including rehab units of a hospital .</option>
+  						<option value="Expired">Expired</option>
+  						<option value="Discharged/transferred to another type of inpatient care institution">Discharged/transferred to another type of inpatient care institution</option>
+  						<option value="Discharged/transferred to ICF">Discharged/transferred to ICF</option>
+  						<option value="Left AMA">Left AMA</option>
+  						<option value="Hospice / home">Hospice / home</option>
+  					</Select>
+				</td>
+			</tr>
+			<tr>
+				<td>Medical Specialty</td>
+				<td>
+					<Select id="Medical_Specialty">
+						<option value="">Select</option>
+						<option value="InternalMedicine">InternalMedicine</option>
+  						<option value="Emergency/Trauma">Emergency/Trauma</option>
+  						<option value="Family/GeneralPractice">Family/GeneralPractice</option>
+  						<option value="Cardiology">Cardiology</option>
+  						<option value="Surgery-General">Surgery-General</option>
+  						<option value="Nephrology">Nephrology</option>
+  						<option value="Orthopedics">Orthopedics</option>
+  						<option value="Orthopedics-Reconstructive">Orthopedics-Reconstructive</option>
+  						<option value="Radiologist">Radiologist</option>
+  						<option value="Psychiatry">Psychiatry</option>
+  					</Select>
+				</td>
+			</tr>
+			<tr>
+				<td>Payer Code</td>
+				<td>
+					<Select id="Payer_Code">
+						<option value="">Select</option>
+						<option value="MC">MC</option>
+  						<option value="HM">HM</option>
+  						<option value="SP">SP</option>
+  						<option value="BC">BC</option>
+  						<option value="MD">MD</option>
+  						<option value="CP">CP</option>
+  						<option value="UN">UN</option>
+  						<option value="CM">CM</option>
+  						<option value="OG">OG</option>
+  					</Select>
+				</td>
+			</tr>
+		</table>
+		<button type="button" onclick="callApi();" style="Font-size:16px;font-weight:bold;margin:10px 0px;">Predict</button>
+		<button type="button" onclick="refresh();" style="Font-size:16px;font-weight:bold;margin:10px 0px;">Clear</button>
+	</div>
+	<div id="id02">
+		<label style="font-size:1.5em;">Result</label>
+		<div id="id04" style="font-size:1.7em;margin-top:0.5em;display:none;">Chance of readmission </div>
+		<div id="id03" style="display:none;"></div>
+	</div>
+	<div style="width: 100%; display: inline-block; background-color: #eeeeee; line-height: 30px; padding-left:5px;">Disclaimer: This website intends to demonstrate the use of Amazon Machine Learning for predicting readmissions. It is based on a fixed publicly available dataset. The output should be used for illustration purposes only. </div>
+</body>
+
+<script src="https://sdk.amazonaws.com/js/aws-sdk-2.3.3.min.js"></script>
+<script>
+
+	function callApi(){
+		AWS.config = new AWS.Config({accessKeyId:'AWSAccessKeyID', secretAccessKey:'AWSSecretAccessKeyID', region: 'AWSRegion'});
+		var machinelearning = new AWS.MachineLearning({apiVersion: '2014-12-12'});
+		var inputparam = "";
+		
+		var gender_value="";
+		if (document.getElementById('gender_female').checked) {
+  			gender_value = document.getElementById('gender_female').value;
+		}else if (document.getElementById('gender_male').checked) {
+  			gender_value = document.getElementById('gender_male').value;
+		}
+		if(gender_value != "")
+			inputparam = '"gender":'+'"'+gender_value+'"'+","+"\n";
+		
+		var age_category_value="";
+		if (document.getElementById('age_category_adult').checked) {
+  			age_category_value = document.getElementById('age_category_adult').value;
+		}else if (document.getElementById('age_category_old').checked) {
+  			age_category_value = document.getElementById('age_category_old').value;
+		}else if (document.getElementById('age_category_young').checked) {
+  			age_category_value = document.getElementById('age_category_young').value;
+		}
+		//if(age_category_value != null)
+			inputparam = inputparam + '"age_category":'+'"'+age_category_value+'"'+","+"\n";
+
+		//if(document.getElementById('Race').value != "")
+			inputparam = inputparam + '"race":'+'"'+document.getElementById('Race').value+'"'+","+"\n";
+		
+		//if(document.getElementById('Discharge_Disposition').value != "")
+			inputparam = inputparam + '"discharge_disposition":'+'"'+document.getElementById('Discharge_Disposition').value+'"'+","+"\n";
+		
+		//if(document.getElementById('Admission_Source').value != "")
+			inputparam = inputparam + '"admission_source":'+'"'+document.getElementById('Admission_Source').value+'"'+","+"\n";
+		
+		//if(document.getElementById('Admission_Type').value != "")
+			inputparam = inputparam + '"admission_type":'+'"'+document.getElementById('Admission_Type').value+'"'+","+"\n";
+		
+		//if(document.getElementById('Insulin').value != "")
+			inputparam = inputparam + '"insulin":'+'"'+document.getElementById('Insulin').value+'"'+","+"\n";
+		
+		var diabetes_value="";
+		if (document.getElementById('diabetes_med_yes').checked) {
+  			diabetes_value = document.getElementById('diabetes_med_yes').value;
+		}else if (document.getElementById('diabetes_med_no').checked) {
+  			diabetes_value = document.getElementById('diabetes_med_no').value;
+		}
+		//if(diabetes_value != "")
+			inputparam = inputparam + '"diabetesmed":'+'"'+diabetes_value+'"'+","+"\n";
+
+		//if(document.getElementById('Medical_Specialty').value != "")
+			inputparam = inputparam + '"medical_specialty":'+'"'+document.getElementById('Medical_Specialty').value+'"'+","+"\n";
+			
+		//if(document.getElementById('Payer_Code').value != "")
+			inputparam = inputparam + '"payer_code":'+'"'+document.getElementById('Payer_Code').value+'"'+","+"\n";
+		
+		if(inputparam != "")
+			inputparam = inputparam.substring(0,inputparam.length -2) +",";
+		
+	    var remainingFields = '"'+"weight"+'"'+":"+'""'+","+'"'+"patient_nbr"+'"'+":"+'""'+","+'"'+"age"+'"'+":"+'""'+","+'"'+"encounter_id"+'"'+":"+'""'+","+'"'+"time_in_hospital"+'"'+":"+'""'+","+'"'+"num_lab_procedures"+'"'+":"+'""'+","+'"'+"num_procedures"+'"'+":"+'""'+","+'"'+"num_medications"+'"'+":"+'""'+","+'"'+"number_outpatient"+'"'+":"+'""'+","+'"'+"number_emergency"+'"'+":"+'""'+","+'"'+"number_inpatient"+'"'+":"+'""'+","+'"'+"diag_1"+'"'+":"+'""'+","+'"'+"diag_2"+'"'+":"+'""'+","+'"'+"diag_3"+'"'+":"+'""'+","+'"'+"number_diagnoses"+'"'+":"+'""'+","+'"'+"max_glu_serum"+'"'+":"+'""'+","+'"'+"a1cresult"+'"'+":"+'""'+","+'"'+"metformin"+'"'+":"+'""'+","+'"'+"repaglinide"+'"'+":"+'""'+","+'"'+"nateglinide"+'"'+":"+'""'+","+'"'+"chlorpropamide"+'"'+":"+'""'+","+'"'+"glimepiride"+'"'+":"+'""'+","+'"'+"acetohexamide"+'"'+":"+'""'+","+'"'+"glipizide"+'"'+":"+'""'+","+'"'+"glyburide"+'"'+":"+'""'+","+'"'+"tolbutamide"+'"'+":"+'""'+","+'"'+"pioglitazone"+'"'+":"+'""'+","+'"'+"rosiglitazone"+'"'+":"+'""'+","+'"'+"acarbose"+'"'+":"+'""'+","+'"'+"miglitol"+'"'+":"+'""'+","+'"'+"troglitazone"+'"'+":"+'""'+","+'"'+"tolazamide"+'"'+":"+'""'+","+'"'+"examide"+'"'+":"+'""'+","+'"'+"citoglipton"+'"'+":"+'""'+","+'"'+"glyburide_metformin"+'"'+":"+'""'+","+'"'+"glipizide_metformin"+'"'+":"+'""'+","+'"'+"glimepiride_pioglitazone"+'"'+":"+'""'+","+'"'+"metformin_rosiglitazone"+'"'+":"+'""'+","+'"'+"metformin_pioglitazone"+'"'+":"+'""'+","+'"'+"change"+'"'+":"+'""'+","+'"'+"readmission_result1"+'"'+":"+'""';
+		
+		var finalInput = "{"+ inputparam + remainingFields +"}";
+		//alert(inputparam);
+		var obj = eval("(" + finalInput + ')');
+		var params = {
+	 	 	MLModelId: 'ml-UWcaWSCVExZ',
+	  		PredictEndpoint: 'https://realtime.machinelearning.us-east-1.amazonaws.com',
+	  		Record: obj
+		};
+		var request = machinelearning.predict(params);
+		request.on('success', function(resp) {
+	  		if(resp.data && resp.data){
+	  			if(resp.data.Prediction && resp.data.Prediction.predictedScores){
+	  				formatResult(resp.data.Prediction);
+	  			}
+	  		}
+		});
+		request.send();
+	}
+	
+	function formatResult(predictedScoresResult){
+		var predictedScore = JSON.stringify(predictedScoresResult.predictedScores[predictedScoresResult.predictedLabel]);
+		var finalScore, resultMessage;
+		
+		if(!isNaN(predictedScore)){
+			finalScore = Math.round(predictedScore * 100);
+			resultMessage = finalScore + "%";
+		}
+		document.getElementById("id04").style.display = "";
+		document.getElementById("id03").style.display = "";
+		document.getElementById("id03").innerHTML = resultMessage;	
+		if(finalScore<40)
+			document.getElementById("id03").style.color = "#228b22";
+		else if(finalScore>40 && finalScore<60)
+			document.getElementById("id03").style.color = "#ffe63b";	
+		else if(finalScore>60)
+			document.getElementById("id03").style.color = "#ff0000";		
+	}
+	
+	function refresh(){
+		document.getElementById('gender_female').checked = false;
+		document.getElementById('gender_male').checked = false;
+		document.getElementById('age_category_adult').checked = false;
+		document.getElementById('age_category_old').checked = false;
+		document.getElementById('age_category_young').checked = false;
+		document.getElementById("Race").value = "";
+		document.getElementById('Discharge_Disposition').value = "";
+		document.getElementById('Admission_Source').value = "";
+		document.getElementById('Admission_Type').value = "";
+		document.getElementById('Insulin').value = "";
+		document.getElementById('diabetes_med_yes').checked = false;
+		document.getElementById('diabetes_med_no').checked = false;
+		document.getElementById('Medical_Specialty').value = "";
+		document.getElementById('Payer_Code').value = "";
+		document.getElementById("id04").style.display = "none";
+		document.getElementById("id03").style.display = "none";
+	}
+</script>
+</html>
