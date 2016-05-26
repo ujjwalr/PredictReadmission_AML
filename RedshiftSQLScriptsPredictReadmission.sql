@@ -84,7 +84,7 @@ readmitted  VARCHAR(20)
 ALTER TABLE diabetes_data ADD PRIMARY KEY (encounter_id);
 
 
-// data load
+-- data load
 
 insert into admission_type(admission_type_id,description) values (1,'Emergency');
 insert into admission_type(admission_type_id,description) values (2,'Urgent');
@@ -155,7 +155,7 @@ insert into admission_source(admission_source_id,description) values (26,'Transf
 copy diabetes_data from 's3://inpatientpayments/Diabetes/diabetic_data.csv' credentials 'aws_access_key_id=AKIAIYMZRDO3VSU564HA;aws_secret_access_key=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' delimiter ',' IGNOREHEADER 1;
 
 
-//data massaging
+--data massaging
 
 
 -- updating null values
