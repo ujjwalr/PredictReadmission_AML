@@ -152,7 +152,8 @@ insert into admission_source(admission_source_id,description) values (24,' Born 
 insert into admission_source(admission_source_id,description) values (25,' Transfer from Ambulatory Surgery Center');
 insert into admission_source(admission_source_id,description) values (26,'Transfer from Hospice');
 
-copy diabetes_data from 's3://inpatientpayments/Diabetes/diabetic_data.csv' credentials 'aws_access_key_id=AKIAIYMZRDO3VSU564HA;aws_secret_access_key=PX3bPF7jg5pfOZBHc8UpcfCtOjO/VLHhdehmE5pb' delimiter ',' IGNOREHEADER 1;
+-- replace the AWSAccessKeyID and SecretAccessKey
+copy diabetes_data from 's3://inpatientpayments/Diabetes/diabetic_data.csv' credentials 'aws_access_key_id=<AWSAccessKeyID>;aws_secret_access_key=<SecretAccessKey>' delimiter ',' IGNOREHEADER 1;
 
 
 --data massaging
