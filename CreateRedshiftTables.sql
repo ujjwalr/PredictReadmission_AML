@@ -1,3 +1,7 @@
+/* 
+The following DDL statements create the Master and Transaction tables as described in the Blog post published here:
+*/
+
 -- Drop existing tables
 drop table discharge_disposition; 
 drop table admission_type; 
