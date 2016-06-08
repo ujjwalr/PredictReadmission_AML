@@ -1,5 +1,6 @@
-/*
-Replace the AWSAccessKeyID, AWSSecretAccessKey, AWSRegion and MLModelID with correspoding values
+/* 
+The following script contains the code for the application to predict readmissions for diabetes patients as described in the blog post published here:
+Replace the values for AWS ACCOUNT ID,COGNITO IAM ROLE ARN, COGNITO IDENTITY POOL ID, ML MODEL ID and ML MODEL ENDPOINT with corresponding values.
 */
 
 <!DOCTYPE html>
@@ -204,11 +205,19 @@ Replace the AWSAccessKeyID, AWSSecretAccessKey, AWSRegion and MLModelID with cor
 <script src="https://sdk.amazonaws.com/js/aws-sdk-2.3.3.min.js"></script>
 <script>
 
-	function callApi(){
-		AWS.config = new AWS.Config({accessKeyId:'AWSAccessKeyID', secretAccessKey:'AWSSecretAccessKeyID', region: 'AWSRegion'});
-		var machinelearning = new AWS.MachineLearning({apiVersion: '2014-12-12'});
-		var inputparam = "";
+  function callApi(){		
+	var machinelearning = new AWS.MachineLearning({apiVersion: '2014-12-12'});
+	var parameters = {
+      AccountId: "AWS ACCOUNT ID",
+      RoleArn: "COGNITO IAM ROLE ARN",
+      IdentityPoolId: "COGNITO IDENTITY POOL ID"
+       };
+ 		// set the Amazon Cognito region
+  			AWS.config.region = 'us-east-1';
+		// initialize the Credentials object with our parameters
+  			AWS.config.credentials = new AWS.CognitoIdentityCredentials(parameters);
 		
+		var inputparam = "";
 		var gender_value="";
 		if (document.getElementById('gender_female').checked) {
   			gender_value = document.getElementById('gender_female').value;
@@ -226,22 +235,16 @@ Replace the AWSAccessKeyID, AWSSecretAccessKey, AWSRegion and MLModelID with cor
 		}else if (document.getElementById('age_category_young').checked) {
   			age_category_value = document.getElementById('age_category_young').value;
 		}
-		//if(age_category_value != null)
 			inputparam = inputparam + '"age_category":'+'"'+age_category_value+'"'+","+"\n";
 
-		//if(document.getElementById('Race').value != "")
 			inputparam = inputparam + '"race":'+'"'+document.getElementById('Race').value+'"'+","+"\n";
 		
-		//if(document.getElementById('Discharge_Disposition').value != "")
 			inputparam = inputparam + '"discharge_disposition":'+'"'+document.getElementById('Discharge_Disposition').value+'"'+","+"\n";
 		
-		//if(document.getElementById('Admission_Source').value != "")
 			inputparam = inputparam + '"admission_source":'+'"'+document.getElementById('Admission_Source').value+'"'+","+"\n";
 		
-		//if(document.getElementById('Admission_Type').value != "")
 			inputparam = inputparam + '"admission_type":'+'"'+document.getElementById('Admission_Type').value+'"'+","+"\n";
 		
-		//if(document.getElementById('Insulin').value != "")
 			inputparam = inputparam + '"insulin":'+'"'+document.getElementById('Insulin').value+'"'+","+"\n";
 		
 		var diabetes_value="";
@@ -250,13 +253,10 @@ Replace the AWSAccessKeyID, AWSSecretAccessKey, AWSRegion and MLModelID with cor
 		}else if (document.getElementById('diabetes_med_no').checked) {
   			diabetes_value = document.getElementById('diabetes_med_no').value;
 		}
-		//if(diabetes_value != "")
 			inputparam = inputparam + '"diabetesmed":'+'"'+diabetes_value+'"'+","+"\n";
 
-		//if(document.getElementById('Medical_Specialty').value != "")
 			inputparam = inputparam + '"medical_specialty":'+'"'+document.getElementById('Medical_Specialty').value+'"'+","+"\n";
 			
-		//if(document.getElementById('Payer_Code').value != "")
 			inputparam = inputparam + '"payer_code":'+'"'+document.getElementById('Payer_Code').value+'"'+","+"\n";
 		
 		if(inputparam != "")
@@ -265,13 +265,14 @@ Replace the AWSAccessKeyID, AWSSecretAccessKey, AWSRegion and MLModelID with cor
 	    var remainingFields = '"'+"weight"+'"'+":"+'""'+","+'"'+"patient_nbr"+'"'+":"+'""'+","+'"'+"age"+'"'+":"+'""'+","+'"'+"encounter_id"+'"'+":"+'""'+","+'"'+"time_in_hospital"+'"'+":"+'""'+","+'"'+"num_lab_procedures"+'"'+":"+'""'+","+'"'+"num_procedures"+'"'+":"+'""'+","+'"'+"num_medications"+'"'+":"+'""'+","+'"'+"number_outpatient"+'"'+":"+'""'+","+'"'+"number_emergency"+'"'+":"+'""'+","+'"'+"number_inpatient"+'"'+":"+'""'+","+'"'+"diag_1"+'"'+":"+'""'+","+'"'+"diag_2"+'"'+":"+'""'+","+'"'+"diag_3"+'"'+":"+'""'+","+'"'+"number_diagnoses"+'"'+":"+'""'+","+'"'+"max_glu_serum"+'"'+":"+'""'+","+'"'+"a1cresult"+'"'+":"+'""'+","+'"'+"metformin"+'"'+":"+'""'+","+'"'+"repaglinide"+'"'+":"+'""'+","+'"'+"nateglinide"+'"'+":"+'""'+","+'"'+"chlorpropamide"+'"'+":"+'""'+","+'"'+"glimepiride"+'"'+":"+'""'+","+'"'+"acetohexamide"+'"'+":"+'""'+","+'"'+"glipizide"+'"'+":"+'""'+","+'"'+"glyburide"+'"'+":"+'""'+","+'"'+"tolbutamide"+'"'+":"+'""'+","+'"'+"pioglitazone"+'"'+":"+'""'+","+'"'+"rosiglitazone"+'"'+":"+'""'+","+'"'+"acarbose"+'"'+":"+'""'+","+'"'+"miglitol"+'"'+":"+'""'+","+'"'+"troglitazone"+'"'+":"+'""'+","+'"'+"tolazamide"+'"'+":"+'""'+","+'"'+"examide"+'"'+":"+'""'+","+'"'+"citoglipton"+'"'+":"+'""'+","+'"'+"glyburide_metformin"+'"'+":"+'""'+","+'"'+"glipizide_metformin"+'"'+":"+'""'+","+'"'+"glimepiride_pioglitazone"+'"'+":"+'""'+","+'"'+"metformin_rosiglitazone"+'"'+":"+'""'+","+'"'+"metformin_pioglitazone"+'"'+":"+'""'+","+'"'+"change"+'"'+":"+'""'+","+'"'+"readmission_result1"+'"'+":"+'""';
 		
 		var finalInput = "{"+ inputparam + remainingFields +"}";
-		//alert(inputparam);
+	
 		var obj = eval("(" + finalInput + ')');
 		var params = {
-	 	 	MLModelId: 'MLModelID',
-	  		PredictEndpoint: 'https://realtime.machinelearning.us-east-1.amazonaws.com',
+	 	 	MLModelId: 'ML MODEL ID',
+	  		PredictEndpoint: 'ML MODEL ENDPOINT',
 	  		Record: obj
 		};
+
 		var request = machinelearning.predict(params);
 		request.on('success', function(resp) {
 	  		if(resp.data && resp.data){
