@@ -1,5 +1,5 @@
 /* 
-The following script massages the data set to make it suitable for use with the machine learning model. It also creates a new table diabetes_data_modified that has the custom target attribute readmission_result as described in the blog post published at the folloing link:
+The following script massages the data set to make it suitable for use with the machine learning model. It also creates a new table diabetes_data_modified that has the custom target attribute readmission_result as described in the blog post published here:
 */
 
 
