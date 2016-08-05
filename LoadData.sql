@@ -1,5 +1,5 @@
 /* 
-The following statements loads data from S3 into Redshift as described in the blog post pulished here:
+The following statements loads data from S3 into Redshift as described in the blog post pulished here:http://blogs.aws.amazon.com/bigdata/post/Tx1Z7AR9QTXIWA1/Readmission-Prediction-Through-Patient-Risk-Stratification-Using-Amazon-Machine
 Replace the aws_access_key and aws_secret_access_key with corresponding values
 */
 
