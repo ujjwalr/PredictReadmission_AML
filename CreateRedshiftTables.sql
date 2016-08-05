@@ -1,5 +1,5 @@
 /* 
-The following DDL statements create the Master and Transaction tables as described in the Blog post published here:
+The following DDL statements create the Master and Transaction tables as described in the Blog post published here: http://blogs.aws.amazon.com/bigdata/post/Tx1Z7AR9QTXIWA1/Readmission-Prediction-Through-Patient-Risk-Stratification-Using-Amazon-Machine
 */
 
 -- Drop existing tables
