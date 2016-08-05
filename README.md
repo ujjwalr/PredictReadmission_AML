@@ -1,3 +1,2 @@
 # PredictReadmission_AML
-This repository consists of scripts referenced in the readmission prediction using AML blog. The blog is published as part of the Amazon web services big data blog and can be accessed at the following link: <>
-
+TThis repository consists of scripts referenced in the [Readmission Prediction Through Patient Risk Stratification Using Amazon Machine Learning](http://blogs.aws.amazon.com/bigdata/post/Tx1Z7AR9QTXIWA1/Readmission-Prediction-Through-Patient-Risk-Stratification-Using-Amazon-Machine) post on the AWS Big Data blog.
