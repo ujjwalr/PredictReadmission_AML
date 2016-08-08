@@ -20,10 +20,10 @@ update diabetes_data set age_category = 'Adult' where age in ('[20-30)','[30-40)
 update diabetes_data set age_category = 'Old' where age in ('[50-60)','[60-70)','[70-80)','[80-90)','[90-100)');
 
 -- Adding new readmission_result column and updating the readmission results
-alter table diabetes_data add column readmission_result1 varchar(10);
-update diabetes_data set readmission_result1='Yes' where readmitted='<30';
-update diabetes_data set readmission_result1='No' where readmitted='>30';
-update diabetes_data set readmission_result1='No' where readmitted='NO';
+alter table diabetes_data add column readmission_result varchar(10);
+update diabetes_data set readmission_result='Yes' where readmitted='<30';
+update diabetes_data set readmission_result='No' where readmitted='>30';
+update diabetes_data set readmission_result='No' where readmitted='NO';
 
 
 -- Creating the modified dataset for the model
